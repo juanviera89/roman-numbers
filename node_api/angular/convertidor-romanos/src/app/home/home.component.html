@@ -1,0 +1,47 @@
+<h1>Convertidor de numeros romanos</h1>
+<form class="row g-3 needs-validation" novalidate target="natural/romano" (ngSubmit)="convertirNumeroNatural($event)">
+  <div class="col-md-4">
+    <label for="validationDefault" class="form-label"
+      >Numero natural a romano:</label
+    >
+    <input  [ngClass]="{'is-invalid' : !numeroNaturalValido}"
+      type="number"
+      min="0"
+      max="3999"
+      class="form-control"
+      id="validationDefault" name="validationDefault"
+      placeholder="Ingrese numero natural (1234567890)" [ngModelOptions]="{standalone: true}"
+      required (change)="validarNumeroNatural()" [(ngModel)]="numeroNatural"
+    />
+    <div class="invalid-feedback">
+      Debes ingresar un numero natural. Digitos 1234567890
+    </div>
+    <ngb-alert type="success" *ngIf="numeroRomanoDeNatural" (closed)="numeroRomanoDeNatural = null">{{ numeroRomanoDeNatural }}</ngb-alert>
+    <ngb-alert type="danger" *ngIf="errorRomanoDeNatural" (closed)="errorRomanoDeNatural = null">{{ errorRomanoDeNatural }}</ngb-alert>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" [disabled]="!numeroNaturalValido">Convertir a romano</button>
+  </div>
+</form>
+<form class="row g-3 needs-validation" novalidate target="romano/natural" (ngSubmit)="convertirNumeroRomano($event)">
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label"
+      >Numero romano a natural:</label
+    >
+    <input [ngClass]="{'is-invalid' : !numeroRomanoValido}"
+      type="text" name="validationCustom01"
+      class="form-control"
+      id="validationCustom01"
+      placeholder="Ingrese numero romano (IVXLCDM)"
+      required (change)="validarNumeroRomano()"  [(ngModel)]="numeroRomano"
+    />
+    <div class="invalid-feedback">
+      Debes ingresar un numero romano. Digitos IVXLCDM
+    </div>
+    <ngb-alert type="success" *ngIf="numeroNaturalDeRomano" (closed)="numeroNaturalDeRomano = null">{{ numeroNaturalDeRomano }}</ngb-alert>
+    <ngb-alert type="danger" *ngIf="errorNaturalDeRomano" (closed)="errorNaturalDeRomano = null">{{ errorNaturalDeRomano }}</ngb-alert>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" [disabled]="!numeroRomanoValido">Convertir a natural</button>
+  </div>
+</form>
