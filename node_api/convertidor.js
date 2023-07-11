@@ -1,7 +1,5 @@
 "use strict"
 
-const { exit } = require('process');
-
 class NumerosRomanos {
     static _simbolosRomanos = [
         ["I", "V"],
@@ -48,66 +46,5 @@ class NumerosRomanos {
         return digitosNaturales.reduce( (resultado, digitoNatural) => resultado + digitoNatural , 0)
     }
 }
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
 
-function preguntarNumeroNatural (reintentar){
-    readline.question('¿Que numero natural deseas convertir? ', numero => {
-        try {
-            console.log(`${numero} en numeros romanos es :${NumerosRomanos.convertirARomanos(numero)}`);
-            return reintentar()
-        } catch (error) {
-            if (error.message && error.message === 'Parametro de entrada debe ser un numero entero'){
-                console.log('Debes ingresar un numero entero');
-            } else 
-                console.log('Ha ocurrido un error');
-            return reintentar()
-        }
-      });
-      
-}
-
-function preguntarNumeroRomano (reintentar){
-    readline.question(`¿Que numero romano deseas convertir? `, numero => {
-        try {
-            if(typeof numero !== 'string' || !isNaN(numero)) {
-                console.log('Debe ingresar un numero romano, no un numero entero');
-                return reintentar()
-            } 
-            console.log(`${numero} en numeros romanos es :${NumerosRomanos.convertirANatural(numero)}`);
-            return reintentar()
-        } catch (error) {
-            console.log(error.message, 'Ha ocurrido un error');
-            return reintentar()
-        }
-      });
-      
-}
-function reintentarWrapper(callback ){
-     function reintentar() {
-        readline.question('¿Deseas convertir otro numero? (S/N)', respuesta => { 
-            if(['si','s','y','yes'].includes(`${respuesta}`.toLowerCase())) return setImmediate(callback)
-            return exit(0)
-        })
-    }
-    return reintentar
-}   
-function preguntarNumero (){
-    readline.question(`¿Que tipo de numero deseas convertir? 
-    (a) Romano a Natural
-    (b) Natural a Romano
-    `, seleccion => {
-        if( `${seleccion}`.toLowerCase() == 'a')
-            return preguntarNumeroRomano(reintentarWrapper(preguntarNumero))
-        else if( `${seleccion}`.toLowerCase() == 'b')
-            return preguntarNumeroNatural(reintentarWrapper(preguntarNumero))
-        else
-            console.log('Debe seleccionar "a" o "b"');
-        return setImmediate(preguntarNumero)
-      });
-      
-}
-
-preguntarNumero()
+module.exports = NumerosRomanos
