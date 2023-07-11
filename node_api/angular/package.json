@@ -1,0 +1,15 @@
+{
+  "name": "com.juanviera.convertidor.romanos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "angular-init" : "ng new convertidor-romanos"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^16.1.4"
+  }
+}
